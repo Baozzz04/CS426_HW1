@@ -38,7 +38,7 @@ export const resources = [
   },
 ];
 
-const activities = [
+export const activities = [
   // grams CO₂e per unit
   {
     id: 1,
@@ -92,4 +92,27 @@ const activities = [
   },
 ];
 
-export default activities;
+export const guidelines = [
+  { label: "Low", range: "up to 10" },
+  { label: "Medium", range: "10 – 20" },
+  { label: "High", range: "above 20" },
+];
+
+export interface Activity {
+  name: string;
+  date: string;
+  type: string;
+  avgCarbon: number;
+}
+
+interface TableHeader {
+  label: string;
+  key: keyof Activity;
+}
+
+export const headers: TableHeader[] = [
+  { label: "Activity Name", key: "name" },
+  { label: "Date", key: "date" },
+  { label: "Type", key: "type" },
+  { label: "Avg. Carbon Produced", key: "avgCarbon" },
+];
