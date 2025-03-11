@@ -37,3 +37,59 @@ export const resources = [
       "Learn practical methods to conserve water in your everyday life. This resource covers everything from installing low-flow fixtures and rainwater harvesting systems to smart irrigation practices and regular leak checks. It details how small changes can lead to substantial water savings, benefiting both your wallet and the environment.",
   },
 ];
+
+const activities = [
+  // grams CO₂e per unit
+  {
+    id: 1,
+    type: "Transportation",
+    carbonValue: 300,
+  },
+  {
+    id: 2,
+    type: "Residential Energy",
+    carbonValue: 530,
+  },
+  {
+    id: 3,
+    type: "Food Consumption",
+    carbonValue: 2500,
+  },
+  {
+    id: 4,
+    type: "Waste Generation",
+    carbonValue: 150,
+  },
+  {
+    id: 5,
+    type: "Water Usage",
+    carbonValue: 50,
+  },
+  {
+    id: 6,
+    type: "Consumer Goods",
+    carbonValue: 800,
+  },
+  {
+    id: 7,
+    type: "Clothing",
+    carbonValue: 5000,
+  },
+  {
+    id: 8,
+    type: "Electronics",
+    carbonValue: 200,
+  },
+  {
+    id: 9,
+    type: "Air Travel",
+    carbonValue: 240,
+  },
+  {
+    id: 10,
+    type: "Entertainment",
+    carbonValue: 100,
+  },
+];
+
+export default activities;

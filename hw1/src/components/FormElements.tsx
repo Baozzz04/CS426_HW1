@@ -1,17 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { fixedWidth } from "../utils/constants";
-
-interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  defaultValue: string;
-  value?: string;
-  bgColor?: string;
-  borderColor?: string;
-  cornerRadius?: string;
-  width?: number;
-  type?: string;
-  showPasswordIcon?: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
@@ -25,64 +13,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   img?: string;
   handleClick: () => void;
 }
-
-export const TextField = (props: TextFieldProps) => {
-  const {
-    defaultValue,
-    value,
-    bgColor,
-    borderColor,
-    cornerRadius,
-    width = fixedWidth,
-    type,
-    showPasswordIcon,
-    onChange,
-  } = props;
-
-  const defaultValueClass = defaultValue ? defaultValue : "";
-  const bgColorClass = bgColor ? bgColor : "bg-tertiary";
-  const borderColorClass = borderColor ? borderColor : "border-tertiary";
-  const cornerRadiusClass = cornerRadius ? cornerRadius : "rounded-2xl";
-  const widthClass = width ? width : fixedWidth;
-  const typeClass = type ? type : "text";
-  const showPasswordIconClass = showPasswordIcon ? showPasswordIcon : false;
-
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const inputType =
-    typeClass === "password"
-      ? isPasswordVisible
-        ? "text"
-        : "password"
-      : typeClass;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
-  };
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible((prev) => !prev);
-  };
-
-  return (
-    <div className="relative" style={{ width: widthClass }}>
-      <input
-        placeholder={defaultValueClass}
-        value={value}
-        onChange={handleChange}
-        type={inputType}
-        className={`p-4 text-md text-black border-2 w-full ${bgColorClass} 
-                          ${borderColorClass} ${cornerRadiusClass}`}
-      />
-      {showPasswordIconClass && (
-        <img
-          src={isPasswordVisible ? "/showpassword.svg" : "/hidepassword.svg"}
-          alt={isPasswordVisible ? "Show password" : "Hide password"}
-          onClick={togglePasswordVisibility}
-          className="absolute right-6 top-4 cursor-pointer w-[20px] h-[28px]"
-        />
-      )}
-    </div>
-  );
-};
 
 export const Button = (props: ButtonProps) => {
   const {
