@@ -1,4 +1,3 @@
-import React from "react";
 import NavigationBar from "../components/Cards/NavigationBar";
 
 const ActivityLogging = () => {
