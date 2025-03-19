@@ -39,63 +39,63 @@ export const resources = [
 ];
 
 export const activities = [
-  // grams CO₂e per unit
+  // kg CO₂e per unit event
   {
     id: 1,
     type: "Transportation",
-    carbonValue: 300,
+    carbonValue: 6,
   },
   {
     id: 2,
     type: "Residential Energy",
-    carbonValue: 530,
+    carbonValue: 12,
   },
   {
     id: 3,
     type: "Food Consumption",
-    carbonValue: 2500,
+    carbonValue: 3,
   },
   {
     id: 4,
     type: "Waste Generation",
-    carbonValue: 150,
+    carbonValue: 0.3,
   },
   {
     id: 5,
     type: "Water Usage",
-    carbonValue: 50,
+    carbonValue: 0.05,
   },
   {
     id: 6,
     type: "Consumer Goods",
-    carbonValue: 800,
+    carbonValue: 1,
   },
   {
     id: 7,
     type: "Clothing",
-    carbonValue: 5000,
+    carbonValue: 5,
   },
   {
     id: 8,
     type: "Electronics",
-    carbonValue: 200,
+    carbonValue: 0.5,
   },
   {
     id: 9,
     type: "Air Travel",
-    carbonValue: 240,
+    carbonValue: 25,
   },
   {
     id: 10,
     type: "Entertainment",
-    carbonValue: 100,
+    carbonValue: 0.5,
   },
 ];
 
 export const guidelines = [
-  { label: "Low", range: "up to 10" },
-  { label: "Medium", range: "10 – 20" },
-  { label: "High", range: "above 20" },
+  { label: "Low", range: "up to 100 kg/week" },
+  { label: "Medium", range: "100 – 200 kg/week" },
+  { label: "High", range: "above 200 kg/week" },
 ];
 
 export interface Activity {

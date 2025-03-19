@@ -23,7 +23,9 @@ const CarbonData: React.FC<CarbonDataProps> = ({
         </p>
       </div>
       <div>
-        <h3 className="text-md font-bold mb-2">Guidelines</h3>
+        <h3 className="text-md font-bold mb-2">
+          Weekly Carbon Emission Guidelines
+        </h3>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
           {guidelines.map((item, index) => (
             <li key={index}>
