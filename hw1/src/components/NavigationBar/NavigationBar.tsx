@@ -8,16 +8,10 @@ const NavigationBar: React.FC = () => {
     "flex items-center justify-center gap-4 h-16 w-[175px] border border-transparent text-primary font-normal text-lg rounded-2xl bg-tertiary transition-transform duration-300 ease-in-out active:scale-75 hover:brightness-90";
 
   return (
-    <nav className="relative flex flex-col sm:flex-row items-center justify-center p-4 bg-tertiary text-primary shadow-md">
+    <nav className="relative flex flex-col lg:flex-row items-center justify-center p-4 bg-tertiary text-primary shadow-md">
       {/* Logo Section */}
-      <div
-        className="flex items-center 
-                      mb-4 
-                      sm:mb-0 
-                      sm:absolute sm:left-4 sm:top-1/2 sm:transform sm:-translate-y-1/2"
-      >
+      <div className="flex items-center mb-4 lg:mb-0 lg:absolute lg:left-4 lg:top-1/2 lg:-translate-y-1/2">
         <img src="/Logo.png" alt="Logo" className="w-28 h-14 mr-2" />
-        <span className="text-2xl font-bold">CarbonSense</span>
       </div>
 
       {/* Navigation Buttons */}

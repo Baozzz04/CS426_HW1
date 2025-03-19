@@ -1,25 +1,25 @@
 import { guidelines } from "../../utils/constants";
 
 interface CarbonDataProps {
-  recordedDailyCarbon: number;
   recordedWeeklyCarbon: number;
+  recordedMonthlyCarbon: number;
 }
 
 const CarbonData: React.FC<CarbonDataProps> = ({
-  recordedDailyCarbon,
   recordedWeeklyCarbon,
+  recordedMonthlyCarbon,
 }) => {
   return (
     <div className="bg-white shadow-md rounded-xl p-6">
       <h2 className="text-xl font-semibold mb-4">Your Carbon Data</h2>
       <div className="space-y-2 mb-6">
         <p className="text-gray-700">
-          <span className="font-bold">Recorded Daily Carbon:</span>{" "}
-          {recordedDailyCarbon}
+          <span className="font-bold">Recorded Weekly Carbon Produced:</span>{" "}
+          {recordedWeeklyCarbon}
         </p>
         <p className="text-gray-700">
-          <span className="font-bold">Recorded Weekly Carbon:</span>{" "}
-          {recordedWeeklyCarbon}
+          <span className="font-bold">Recorded Monthly Carbon Produced:</span>{" "}
+          {recordedMonthlyCarbon}
         </p>
       </div>
       <div>

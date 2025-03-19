@@ -8,31 +8,51 @@ interface ActivityFormProps {
 export const ActivityForm: React.FC<ActivityFormProps> = ({
   onLogActivity,
 }) => {
-  const [activityName, setActivityName] = useState("");
-  const [activityType, setActivityType] = useState("");
-  const [activityDate, setActivityDate] = useState("");
-  const [carbonProduced, setCarbonProduced] = useState("");
+  const [formData, setFormData] = useState({
+    activityName: "",
+    activityType: "",
+    activityDate: "",
+    carbonProduced: "",
+  });
+  const [updateStatus, setUpdateStatus] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
 
   const handleLogActivity = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (
+      !formData.activityName ||
+      !formData.activityType ||
+      !formData.activityDate
+    ) {
+      setError("Activity Name, Activity Type, and Activity Date are required.");
+      return;
+    }
+    setError("");
+    setUpdateStatus("Logging Activity...");
     const newActivity: Activity = {
-      name: activityName,
-      date: activityDate,
-      type: activityType,
-      avgCarbon: parseFloat(carbonProduced),
+      name: formData.activityName,
+      date: formData.activityDate,
+      type: formData.activityType,
+      avgCarbon: parseFloat(formData.carbonProduced),
     };
     onLogActivity(newActivity);
-    console.log(
-      "Activity logged:",
-      activityName,
-      activityType,
-      activityDate,
-      carbonProduced
-    );
-    setActivityName("");
-    setActivityType("");
-    setActivityDate("");
-    setCarbonProduced("");
+    setFormData({
+      activityName: "",
+      activityType: "",
+      activityDate: "",
+      carbonProduced: "",
+    });
+    setTimeout(() => {
+      setUpdateStatus("Activity Logged");
+      setTimeout(() => {
+        setUpdateStatus("");
+      }, 2000);
+    }, 1000);
   };
 
   const handleActivityTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -40,13 +60,13 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
     const selectedActivity = activities.find(
       (activity) => activity.type === selectedType
     );
-    if (selectedActivity) {
-      setActivityType(selectedType);
-      setCarbonProduced(selectedActivity.carbonValue.toString());
-    } else {
-      setActivityType("");
-      setCarbonProduced("");
-    }
+    setFormData((prev) => ({
+      ...prev,
+      activityType: selectedType,
+      carbonProduced: selectedActivity
+        ? selectedActivity.carbonValue.toString()
+        : "",
+    }));
   };
 
   return (
@@ -66,8 +86,8 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
           id="activityName"
           type="text"
           placeholder="Name of activity"
-          value={activityName}
-          onChange={(e) => setActivityName(e.target.value)}
+          value={formData.activityName}
+          onChange={handleChange}
           className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
         />
       </div>
@@ -81,7 +101,7 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
           </label>
           <select
             id="activityType"
-            value={activityType}
+            value={formData.activityType}
             onChange={handleActivityTypeChange}
             className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
@@ -103,8 +123,8 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
           <input
             id="activityDate"
             type="date"
-            value={activityDate}
-            onChange={(e) => setActivityDate(e.target.value)}
+            value={formData.activityDate}
+            onChange={handleChange}
             className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
         </div>
@@ -118,12 +138,24 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({
           <input
             id="carbonProduced"
             type="text"
-            value={carbonProduced}
+            value={formData.carbonProduced}
             readOnly
             className="w-full p-2 border rounded-lg bg-gray-100"
           />
         </div>
       </div>
+      {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
+      {updateStatus && (
+        <p
+          className={`mb-4 text-sm ${
+            updateStatus === "Activity Logged"
+              ? "text-green-700"
+              : "text-gray-700"
+          }`}
+        >
+          {updateStatus}
+        </p>
+      )}
       <div className="flex justify-center">
         <button
           type="submit"

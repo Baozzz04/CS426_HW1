@@ -20,7 +20,9 @@ const ActivityChart: React.FC<ActivityChartProps> = ({
   return (
     <div className="bg-white shadow rounded-lg p-4 flex-1">
       <h2 className="text-2xl font-semibold mb-2 text-center">{title}</h2>
-      <Line data={data} options={options} />
+      <div className="relative w-full h-64 md:h-80">
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 };

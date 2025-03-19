@@ -1,27 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import GoalInput from "../components/GoalSettings/GoalInput";
 import CarbonData from "../components/GoalSettings/CarbonData";
 
 const GoalSettings: React.FC = () => {
-  const [dailyCarbonGoal, setDailyCarbonGoal] = useState<string>("");
   const [weeklyCarbonGoal, setWeeklyCarbonGoal] = useState<string>("");
-  const [recordedDailyCarbon] = useState<number>(12);
-  const [recordedWeeklyCarbon] = useState<number>(84);
+  const [monthlyCarbonGoal, setMonthlyCarbonGoal] = useState<string>("");
+  const [recordedWeeklyCarbon, setRecordedWeeklyCarbon] = useState<number>(0);
+  const [recordedMonthlyCarbon, setRecordedMonthlyCarbon] = useState<number>(0);
+  const [updateStatus, setUpdateStatus] = useState<string>("");
+
+  useEffect(() => {
+    const storedWeekly = localStorage.getItem("weeklyCarbonGoal");
+    const storedMonthly = localStorage.getItem("monthlyCarbonGoal");
+    if (storedWeekly) {
+      setWeeklyCarbonGoal(storedWeekly);
+      setRecordedWeeklyCarbon(Number(storedWeekly));
+    }
+    if (storedMonthly) {
+      setMonthlyCarbonGoal(storedMonthly);
+      setRecordedMonthlyCarbon(Number(storedMonthly));
+    }
+  }, []);
 
   const handleSaveGoals = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Goals saved:", dailyCarbonGoal, weeklyCarbonGoal);
+    setUpdateStatus("Updating Carbon Goals...");
+
+    localStorage.setItem("weeklyCarbonGoal", weeklyCarbonGoal);
+    localStorage.setItem("monthlyCarbonGoal", monthlyCarbonGoal);
+
+    setRecordedWeeklyCarbon(Number(weeklyCarbonGoal));
+    setRecordedMonthlyCarbon(Number(monthlyCarbonGoal));
+
+    setTimeout(() => {
+      setUpdateStatus("Carbon Goals Updated");
+      setTimeout(() => {
+        setUpdateStatus("");
+      }, 2000);
+    }, 1000);
   };
 
   const goalInputs = [
-    {
-      id: "dailyGoal",
-      label: "Daily Carbon Goal",
-      placeholder: "e.g., 10",
-      value: dailyCarbonGoal,
-      setter: setDailyCarbonGoal,
-    },
     {
       id: "weeklyGoal",
       label: "Weekly Carbon Goal",
@@ -29,14 +49,20 @@ const GoalSettings: React.FC = () => {
       value: weeklyCarbonGoal,
       setter: setWeeklyCarbonGoal,
     },
+    {
+      id: "monthlyGoal",
+      label: "Monthly Carbon Goal",
+      placeholder: "e.g., 300",
+      value: monthlyCarbonGoal,
+      setter: setMonthlyCarbonGoal,
+    },
   ];
 
   return (
     <div>
       <NavigationBar />
       <div className="p-8">
-        {/* Hero Section */}
-        <div className="text-center my-10">
+        <div className="text-center mt-8 mb-12">
           <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-4">
             Goal Settings
           </h1>
@@ -47,11 +73,8 @@ const GoalSettings: React.FC = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Goals Input Section */}
           <div className="flex-1 bg-white shadow-lg rounded-xl p-8">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-              Set Your Goals
-            </h2>
+            <h2 className="text-xl font-semibold mb-4">Set Your Goals</h2>
             <form onSubmit={handleSaveGoals} className="space-y-6">
               {goalInputs.map((input, index) => (
                 <GoalInput
@@ -63,6 +86,19 @@ const GoalSettings: React.FC = () => {
                   onChange={(e) => input.setter(e.target.value)}
                 />
               ))}
+
+              {updateStatus && (
+                <p
+                  className={`mt-4 text-sm ${
+                    updateStatus === "Carbon Goals Updated"
+                      ? "text-green-700"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {updateStatus}
+                </p>
+              )}
+
               <div className="flex justify-center">
                 <button
                   type="submit"
@@ -74,11 +110,10 @@ const GoalSettings: React.FC = () => {
             </form>
           </div>
 
-          {/* Carbon Data & Guidelines Section */}
           <div className="flex-1">
             <CarbonData
-              recordedDailyCarbon={recordedDailyCarbon}
               recordedWeeklyCarbon={recordedWeeklyCarbon}
+              recordedMonthlyCarbon={recordedMonthlyCarbon}
             />
           </div>
         </div>
