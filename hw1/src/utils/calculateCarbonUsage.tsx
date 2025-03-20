@@ -17,10 +17,12 @@ interface CarbonData {
   topActivity: string;
 }
 
+// Function to calculate total carbon footprint
 const calculateTotalCarbon = (activities: Activity[]): number => {
   return activities.reduce((acc, curr) => acc + curr.avgCarbon, 0);
 };
 
+// Function to calculate weekly carbon footprint
 const calculateWeeklyConsumption = (
   activities: Activity[]
 ): WeeklyConsumption => {
@@ -28,7 +30,7 @@ const calculateWeeklyConsumption = (
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Define a 7-day window: from (today - 3 days) to (today + 3 days)
+  // Define a 7-day window
   const startOfWindow = new Date(today);
   startOfWindow.setDate(today.getDate() - 3);
 
@@ -47,7 +49,7 @@ const calculateWeeklyConsumption = (
     );
   }
 
-  // Define end of window (non-inclusive).
+  // Define end of window
   const endOfWindow = new Date(startOfWindow);
   endOfWindow.setDate(startOfWindow.getDate() + 7);
 
@@ -68,6 +70,7 @@ const calculateWeeklyConsumption = (
   return { labels, data };
 };
 
+// Function to calculate monthly carbon footprint
 const calculateMonthlyConsumption = (
   activities: Activity[]
 ): MonthlyConsumption => {
@@ -105,6 +108,7 @@ const calculateMonthlyConsumption = (
   return { labels, data };
 };
 
+// Function to calculate top activity
 const calculateTopActivity = (activities: Activity[]): string => {
   const typeMap: Record<string, number> = {};
   activities.forEach((activity) => {
@@ -122,6 +126,7 @@ const calculateTopActivity = (activities: Activity[]): string => {
   return maxType;
 };
 
+// Function to calculate carbon data using the previous functions
 export const calculateCarbonData = (activities: Activity[]): CarbonData => {
   return {
     total: calculateTotalCarbon(activities),

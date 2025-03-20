@@ -1,11 +1,8 @@
-import { useEffect, useState, useMemo } from "react";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import SummaryCard from "../components/Home/SummaryCard";
 import ActivityChart from "../components/Home/ActivityChart";
-import { Activity } from "../utils/constants";
-import { calculateCarbonData } from "../utils/calculateCarbonUsage";
-import { getSummaryData } from "../utils/summaryData";
-import { getChartsData, options } from "../utils/chartsData";
+import GoalCard from "../components/Home/GoalCard";
+import { options } from "../utils/chartsData";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,7 +13,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import GoalCard, { Goals } from "../components/Home/GoalCard";
+import { useDashboardData } from "../hooks/userDashboardData";
 
 ChartJS.register(
   CategoryScale,
@@ -29,78 +26,15 @@ ChartJS.register(
 );
 
 const Home = () => {
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [carbonData, setCarbonData] = useState<{
-    total: number;
-    weekly: { labels: string[]; data: number[] };
-    monthly: { labels: string[]; data: number[] };
-    topActivity: string;
-  }>({
-    total: 0,
-    weekly: { labels: [], data: [0, 0, 0, 0, 0, 0, 0] },
-    monthly: { labels: [], data: [0, 0, 0, 0] },
-    topActivity: "",
-  });
-  const [goals, setGoals] = useState<Goals>({ weekly: 0, monthly: 0 });
-
-  useEffect(() => {
-    const stored = localStorage.getItem("activitiesData");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          setActivities(parsed);
-        }
-      } catch (error) {
-        console.error("Error parsing activitiesData from localStorage:", error);
-      }
-    }
-
-    const storedWeekly = localStorage.getItem("weeklyCarbonGoal");
-    const storedMonthly = localStorage.getItem("monthlyCarbonGoal");
-
-    setGoals({
-      weekly: storedWeekly ? Number(storedWeekly) : 0,
-      monthly: storedMonthly ? Number(storedMonthly) : 0,
-    });
-  }, []);
-
-  useEffect(() => {
-    if (activities.length) {
-      const data = calculateCarbonData(activities);
-      setCarbonData(data);
-    }
-  }, [activities]);
-
-  const summaryData = useMemo(
-    () =>
-      getSummaryData(
-        carbonData.total,
-        carbonData.monthly,
-        carbonData.topActivity
-      ),
-    [carbonData]
-  );
-
-  const chartsData = useMemo(
-    () => getChartsData(carbonData.weekly, carbonData.monthly),
-    [carbonData]
-  );
-
-  const weeklyUsage = useMemo(
-    () => carbonData.weekly.data.reduce((sum, val) => sum + val, 0),
-    [carbonData]
-  );
-
-  const monthlyUsage = useMemo(
-    () => carbonData.monthly.data.reduce((sum, val) => sum + val, 0),
-    [carbonData]
-  );
+  const { goals, summaryData, chartsData, weeklyUsage, monthlyUsage } =
+    useDashboardData();
 
   return (
     <div>
+      {/* Navigation Bar Section */}
       <NavigationBar />
       <div className="max-w-4xl mx-auto p-4">
+        {/* Title Section */}
         <header className="text-center mt-8 mb-8">
           <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-4">
             Welcome to Your Dashboard
@@ -111,6 +45,7 @@ const Home = () => {
           </p>
         </header>
 
+        {/* Summary Section, including Total Usage, Monthly Usage, and Top Carbon Activity */}
         <section className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
           {summaryData.map((item, index) => (
             <SummaryCard
@@ -122,6 +57,7 @@ const Home = () => {
           ))}
         </section>
 
+        {/* Goals Section, including Weekly Usage vs Goal and Monthly Usage vs Goal */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <GoalCard
             title="Weekly Usage vs Goal"
@@ -135,6 +71,7 @@ const Home = () => {
           />
         </section>
 
+        {/* Charts Section, including Weekly Usage and Monthly Usage */}
         <section className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-4">
           {chartsData.map((chart, index) => (
             <ActivityChart

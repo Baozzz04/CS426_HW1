@@ -9,6 +9,7 @@ export const LoggedActivities: React.FC<LoggedActivitiesProps> = ({
   activitiesData,
 }) => {
   return (
+    // This is the Logged Activities Section, displaying all activities, including activity name, activity date, activity type, and activity carbon footprint
     <div className="flex-1 bg-white shadow-md rounded-xl p-4">
       <h2 className="text-xl font-semibold mb-4">Logged Activities</h2>
       <div className="overflow-x-auto">

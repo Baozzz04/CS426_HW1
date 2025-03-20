@@ -11,6 +11,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
   image,
   description,
 }) => {
+  // The Resource Card displays the image, title, and description of the resource
   return (
     <div className="w-full mx-auto bg-white rounded-lg shadow-md p-4 md:p-6 transition duration-300 hover:scale-95">
       {" "}

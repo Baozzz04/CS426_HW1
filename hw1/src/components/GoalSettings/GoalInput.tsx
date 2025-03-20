@@ -15,6 +15,7 @@ const GoalInput: React.FC<GoalInputProps> = ({
   value,
   onChange,
 }) => {
+  // Displaying the TextField component for user to input
   return (
     <div>
       <label htmlFor={id} className="block text-gray-700 font-bold mb-2">

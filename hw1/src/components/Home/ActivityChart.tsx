@@ -17,6 +17,7 @@ const ActivityChart: React.FC<ActivityChartProps> = ({
   data,
   options,
 }) => {
+  // Displaying the activity chart with the given title, data, and options
   return (
     <div className="bg-white shadow rounded-lg p-4 flex-1">
       <h2 className="text-2xl font-semibold mb-2 text-center">{title}</h2>

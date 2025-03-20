@@ -2,9 +2,9 @@ import React from "react";
 
 interface GoalCardProps {
   title: string;
-  currentValue: number; // e.g. current usage
-  goalValue: number; // e.g. weekly or monthly goal
-  unit?: string; // default = "kg"
+  currentValue: number;
+  goalValue: number;
+  unit?: string;
 }
 
 export interface Goals {
@@ -35,7 +35,7 @@ const GoalCard: React.FC<GoalCardProps> = ({
   const diff = currentValue - goalValue;
   const percentageDiff = (diff / goalValue) * 100;
 
-  // Determine arrow symbol & color
+  // Determine arrow symbol and color
   const isAboveGoal = diff > 0;
   const arrowSymbol = isAboveGoal ? "▲" : "▼";
   const diffColor = isAboveGoal ? "text-red-600" : "text-green-600";

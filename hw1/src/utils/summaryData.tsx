@@ -9,6 +9,7 @@ export interface MonthlyConsumption {
   data: number[];
 }
 
+// Function to get summary data
 export const getSummaryData = (
   totalCarbon: number,
   monthlyConsumption: MonthlyConsumption,

@@ -1,5 +1,5 @@
 import NavigationBar from "../components/NavigationBar/NavigationBar";
-import ResourceCard from "../components/ResourceLibrary/TipCard";
+import ResourceCard from "../components/ResourceLibrary/ResourceCard";
 import { resources } from "../utils/constants";
 
 const ResourceLibrary: React.FC = () => {
@@ -7,7 +7,7 @@ const ResourceLibrary: React.FC = () => {
     <div>
       <NavigationBar />
       <div className="p-10">
-        {/* Hero Section */}
+        {/* Title Section */}
         <div className="text-center my-8">
           <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400 mb-4">
             Resource Library

@@ -16,6 +16,7 @@ export interface ChartsData {
   data: ChartData;
 }
 
+// Initial chart data for Weekly Activity
 export const initialWeekData: ChartData = {
   labels: [],
   datasets: [
@@ -29,6 +30,7 @@ export const initialWeekData: ChartData = {
   ],
 };
 
+// Initial chart data for Monthly Activity
 export const initialMonthData: ChartData = {
   labels: [],
   datasets: [
@@ -42,6 +44,7 @@ export const initialMonthData: ChartData = {
   ],
 };
 
+// Function to get chart data for Weekly Activity and Monthly Activity
 export const getChartsData = (
   weeklyConsumption: { labels: string[]; data: number[] },
   monthlyConsumption: { labels: string[]; data: number[] }
@@ -66,6 +69,7 @@ export const getChartsData = (
   ];
 };
 
+// Default chart options
 export const options: ChartOptions<"line"> = {
   responsive: true,
   maintainAspectRatio: false,

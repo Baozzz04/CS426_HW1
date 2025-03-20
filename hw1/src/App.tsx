@@ -8,6 +8,7 @@ import ActivityLogging from "./pages/ActivityLogging";
 function App() {
   return (
     <div>
+      {/* This is the list of pages of the website */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/resource-library" element={<ResourceLibrary />} />

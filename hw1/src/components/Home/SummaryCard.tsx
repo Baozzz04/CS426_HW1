@@ -9,6 +9,7 @@ const SummaryCard: React.FC<SummaryCardProps> = ({
   value,
   unit = "kg",
 }) => {
+  // Displaying the title, value and unit for the summary card
   return (
     <div className="bg-white shadow rounded-lg p-6 text-center">
       <h3 className="text-lg font-semibold text-gray-700">{title}</h3>

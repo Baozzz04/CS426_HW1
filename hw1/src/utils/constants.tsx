@@ -1,4 +1,7 @@
+// fixedWidth data
 export const fixedWidth = 546;
+
+// Resources data for the resource page
 export const resources = [
   {
     title: "Energy Efficiency at Home",
@@ -38,6 +41,7 @@ export const resources = [
   },
 ];
 
+// Activities data for the activity page
 export const activities = [
   // kg CO₂e per unit event
   {
@@ -92,12 +96,14 @@ export const activities = [
   },
 ];
 
+// Carbon footprint guidelines
 export const guidelines = [
   { label: "Low", range: "up to 100 kg/week" },
   { label: "Medium", range: "100 – 200 kg/week" },
   { label: "High", range: "above 200 kg/week" },
 ];
 
+// Activity interface
 export interface Activity {
   name: string;
   date: string;
@@ -105,11 +111,13 @@ export interface Activity {
   avgCarbon: number;
 }
 
+// Table header interface
 interface TableHeader {
   label: string;
   key: keyof Activity;
 }
 
+// Table headers for the activity page
 export const headers: TableHeader[] = [
   { label: "Activity Name", key: "name" },
   { label: "Date", key: "date" },
