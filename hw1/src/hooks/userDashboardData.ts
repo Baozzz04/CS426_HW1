@@ -3,6 +3,7 @@ import { Activity } from "../utils/constants";
 import { calculateCarbonData } from "../utils/calculateCarbonUsage";
 import { getSummaryData } from "../utils/summaryData";
 import { getChartsData } from "../utils/chartsData";
+import { useGoals } from "../context/GoalsContext";
 
 interface CarbonData {
   total: number;
@@ -11,15 +12,12 @@ interface CarbonData {
   topActivity: string;
 }
 
-interface Goals {
-  weekly: number;
-  monthly: number;
-}
-
 export const useDashboardData = () => {
+  // Access goals context
+  const {goals} = useGoals();
+
   // States for activities, goals, and carbon data
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [goals, setGoals] = useState<Goals>({ weekly: 0, monthly: 0 });
   const [carbonData, setCarbonData] = useState<CarbonData>({
     total: 0,
     weekly: { labels: [], data: [0, 0, 0, 0, 0, 0, 0] },
@@ -40,14 +38,6 @@ export const useDashboardData = () => {
         console.error("Error parsing activitiesData from localStorage:", error);
       }
     }
-
-    // Retrieve stored goals from local storage
-    const storedWeekly = localStorage.getItem("weeklyCarbonGoal");
-    const storedMonthly = localStorage.getItem("monthlyCarbonGoal");
-    setGoals({
-      weekly: storedWeekly ? Number(storedWeekly) : 0,
-      monthly: storedMonthly ? Number(storedMonthly) : 0,
-    });
   }, []);
 
   // Calculate carbon data when activities change
