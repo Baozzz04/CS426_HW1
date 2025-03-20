@@ -7,16 +7,16 @@ A React-based eco-friendly activity tracker built with TypeScript, Vite, and Tai
 - **Activity Logging:**  
   Log daily activities with details such as activity name, type, date, and associated carbon footprint.
 
-- **Goal Settings:**  
-  Set weekly and monthly carbon goals and compare them with your actual carbon usage.
-
-- **Dashboard:**  
+- **Summary Views:**  
   View summary metrics (total carbon footprint, monthly usage, top carbon activity), goal comparisons, and interactive line charts showing weekly and monthly trends.
+
+- **Goal Setting:**  
+  Set weekly and monthly carbon goals and compare them with your actual carbon usage.
 
 - **Resource Library:**  
   Access a curated list of sustainability resources, including guides on energy efficiency, sustainable transportation, waste reduction, and more.
 
-- **Local Storage Persistence:**  
+- **Local Storage:**  
   All activities and goal settings are stored locally so your data persists across sessions.
 
 ## Project Structure
