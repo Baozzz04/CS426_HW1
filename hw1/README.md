@@ -1,54 +1,41 @@
-# React + TypeScript + Vite
+# Carbon Tracker Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based eco-friendly activity tracker built with TypeScript, Vite, and Tailwind CSS. This app allows users to log daily activities, set carbon footprint goals, and view a dashboard with carbon usage summaries, charts, and sustainability resources.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Activity Logging:**  
+  Log daily activities with details such as activity name, type, date, and associated carbon footprint.
 
-## Expanding the ESLint configuration
+- **Goal Settings:**  
+  Set weekly and monthly carbon goals and compare them with your actual carbon usage.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Dashboard:**  
+  View summary metrics (total carbon footprint, monthly usage, top carbon activity), goal comparisons, and interactive line charts showing weekly and monthly trends.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Resource Library:**  
+  Access a curated list of sustainability resources, including guides on energy efficiency, sustainable transportation, waste reduction, and more.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Local Storage Persistence:**  
+  All activities and goal settings are stored locally so your data persists across sessions.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Project Structure
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **src/**  
+  Contains the source code including components, pages, hooks, and utility functions for carbon calculations and charts data.
+- **public/**  
+  Contains static assets such as images for icons, resources, and the app logo.
+
+- **Configuration Files:**
+  - `vite.config.ts`: Vite configuration for fast development and build performance.
+  - `tsconfig.app.json` & `tsconfig.node.json`: TypeScript configurations for the app and node scripts.
+  - `.gitignore`: Ignores log files, build directories, and editor configurations.
+
+## Setup Instructions
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   cd hw1
+   ```
