@@ -33,9 +33,7 @@ A React-based eco-friendly activity tracker built with TypeScript, Vite, and Tai
 
 ## Setup Instructions
 
-1. **Clone the Repository:**
-
-   ```bash
-   git clone <repository-url>
-   cd hw1
-   ```
+```bash
+npm install
+npm run dev
+```
